@@ -13,7 +13,7 @@ gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'aws-sdk', '~> 1.6'
 gem "figaro"
 gem 'devise'
-
+gem 'unicorn'
 
 group :doc do
 	gem 'sdoc', require: false
