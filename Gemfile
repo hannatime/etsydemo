@@ -12,6 +12,7 @@ gem 'sass-rails', '>= 3.2'
 gem 'paperclip', github: 'thoughtbot/paperclip'
 gem 'aws-sdk', '~> 1.6'
 gem "figaro"
+gem 'devise'
 
 group :doc do
 	gem 'sdoc', require: false
