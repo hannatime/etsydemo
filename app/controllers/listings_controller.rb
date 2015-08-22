@@ -1,6 +1,7 @@
 class ListingsController < ApplicationController
-  before_action :set_listing, only: [:show, :edit, :update, :destroy]
-
+ before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :check_user, only: [:edit, :update, :destroy]
   # GET /listings
   # GET /listings.json
   def index
@@ -62,7 +63,7 @@ class ListingsController < ApplicationController
     end
   end
 
-  private
+   private
     # Use callbacks to share common setup or constraints between actions.
     def set_listing
       @listing = Listing.find(params[:id])
@@ -70,6 +71,12 @@ class ListingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
-      params.require(:listing).permit(:user_id, :name, :description, :price, :image)
+      params.require(:listing).permit(:name, :description, :price, :image)
+    end
+
+    def check_user
+      if current_user != @listing.user
+        redirect_to root_url, alert: "Sorry, this listing belongs to someone else"
+      end
     end
 end
