@@ -14,6 +14,7 @@ gem 'aws-sdk', '~> 1.6'
 gem "figaro"
 gem 'devise'
 gem 'unicorn'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 group :doc do
 	gem 'sdoc', require: false
