@@ -1,0 +1,7 @@
+development:
+  access_key_id: AKIAIAZQYBPHDYNYVSPA
+  secret_access_key: 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
+
+production:
+  access_key_id: AKIAIAZQYBPHDYNYVSPA
+  secret_access_key: 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

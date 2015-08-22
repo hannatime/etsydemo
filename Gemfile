@@ -10,7 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '>= 3.2'
 gem 'paperclip', github: 'thoughtbot/paperclip'
-
+gem 'aws-sdk', '~> 1.6'
 
 group :doc do
 	gem 'sdoc', require: false
@@ -27,5 +27,6 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'sqlite3'
+  gem 'aws-sdk', '~> 1.6'
 end
 
