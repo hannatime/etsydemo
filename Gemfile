@@ -14,6 +14,7 @@ gem 'aws-sdk', '~> 1.6'
 gem "figaro"
 gem 'devise'
 
+
 group :doc do
 	gem 'sdoc', require: false
 end
@@ -21,6 +22,7 @@ end
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+
 end
 
 
