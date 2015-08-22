@@ -1,7 +1,7 @@
 development:
-  access_key_id: AKIAIAZQYBPHDYNYVSPA
-  secret_access_key: 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
+  access_key_id: <%= ENV["ACCESS_KEY_ID"] %>
+  secret_access_key: <%= ENV["SECRET_ACCESS_KEY"] %>
 
 production:
-  access_key_id: AKIAIAZQYBPHDYNYVSPA
-  secret_access_key: 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
+  access_key_id: <%= ENV["ACCESS_KEY_ID"] %>
+  secret_access_key: <%= ENV["SECRET_ACCESS_KEY"] %>
