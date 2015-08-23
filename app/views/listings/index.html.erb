@@ -1,7 +1,13 @@
 <div class="jumbotron">
-  <h1>Handcrafted items from <br>
-      around the world.</h1>
-  <h2>Discover one-of-a-kind items</h2>
+<div class="container">
+  <h1>THE SOCIAL WAY TO INVEST OR BORROW.</h1>
+  <% if user_signed_in? %>
+  <%= link_to 'Lend Now', new_listing_path, class: "btn btn-warning", :style=>'color:#FFFFFF;' %>
+<% end %>
+<% if user_signed_in? %>
+  <%= link_to 'Borrow Now', new_listing_path, class: "btn btn-success", :style=>'color:#FFFFFF;' %>
+<% end %>
+</div>
 </div>
 <div class="center">
   <div class="row">
@@ -23,9 +29,3 @@
     <% end %>
   </div>
 </div>    
-
-<br>
-
-<% if user_signed_in? %>
-  <%= link_to 'New Listing', new_listing_path, class: "btn btn-link" %>
-<% end %>
