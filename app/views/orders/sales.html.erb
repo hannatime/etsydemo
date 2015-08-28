@@ -4,20 +4,20 @@
 
 <table class="table table-striped table-bordered">
   <tr>
-    <th class="center">Image</th>
-    <th class="center">Item</th>
-    <th class="center">Price</th>
-    <th class="center">Customer</th>
-    <th class="center">Date Sold</th>
+    <th class="center">Borrower</th>
+    <th class="center">Value</th>
+    <th class="center">Date Lent</th>
+    <th class="center">Interest %</th>
+    <th class="center">Action %</th>
   </tr>
 
   <% @orders.each do |order| %>
     <tr>
-      <td class="center"><%= image_tag order.listing.image.url(:thumb) %></td>
-      <td class="center"><%= order.listing.name %></td>
-      <td class="center"><%= number_to_currency(order.listing.price) %></td>
       <td class="center"><%= order.buyer.name %></td>
+      <td class="center"><%= number_to_currency(order.listing.price) %></td>
       <td class="center"><%= order.created_at.strftime("%B %-d, %Y") %></td>
+      <td class="center"><%= %></td>
+      <td class="center"><%= link_to "View", @order, class: "btn btn-sm btn-default" %></td>
     </tr>
   <% end %>
 </table>
@@ -25,5 +25,5 @@
 <br>
 
 <% if user_signed_in? %>
-  <%= link_to 'New Listing', new_listing_path, class: "btn btn-link" %>
+  <%= link_to 'New Note', new_listing_path, class: "btn btn-link" %>
 <% end %>

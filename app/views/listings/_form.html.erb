@@ -11,23 +11,73 @@
       </ul>
     </div>
   <% end %>
+<h4><%= "New listing for #{current_user.name}, (Not #{current_user.name}?" %> <%= link_to "Click Here", destroy_user_session_path, method: :delete %>)</h4>
 
+    <div class="form-group hidden">
+    <%= f.text_field :name, :value => params[:id], class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.label "Would you like to lend or borrow money?" %> <br>
+    <%= f.select(:note_type, [['Choose One',""],['Lend',"lend"], ['Borrow',"borrow"]], {},{class: "form-control select_option"}) %>
+  </div>
+
+<div id="lend_fields" style="display:none;">
     <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :description %>
-    <%= f.text_area :description, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :price %>
+    <%= f.label "How much do you want to lend?" %>
     <%= f.text_field :price, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.file_field :image, class: "form-control" %>
+   <%= f.label "Choose how much interest do you want?" %>
+    <%= number_field(:listing, :interest, in: 0.1..10, step: 0.1, class: "form-control") %>
+    </div>
+     <div class="form-group">
+    <%= f.label "How long do you want to invest for?" %>
+    <%= f.text_field :term, class: "form-control" %>
   </div>
-  <div class="form-group">
+    <div class="form-group">
     <%= f.submit class: "btn btn-primary" %>
   </div>
+</div>
+
+<div id="borrow_fields" style="display:none;">
+<div class="form-group">
+    <%= f.label "How much do you need to borrow?" %>
+    <%= f.number_field :price, class: "form-control", :onchange => "updatesum()" %>
+  </div>
+  <div class="form-group">
+<%= f.label "How much interest can you afford" %>
+    <%= number_field(:listing, :interest, in: 0.1..10, step: 0.1, class: "form-control", :onchange => "updatesum()") %>
+    </div>
+    <div class="form-group">
+    <%= f.label "How long do you need the money for?" %>
+    <%= f.number_field :term, class: "form-control" , :onchange => "updatesum()" %>
+  </div>
+    <div class="form-group">
+   <%= f.label "What do you need the money for?"  %>
+    <%= f.text_area :description, class: "form-control" %>
+    </div>
+      <div class="form-group">
+    <%= f.submit class: "btn btn-primary" %>
+  </div>
+</div>  
+<input name="sum" readonly style="border:0px;">
 <% end %>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $( ".select_option" ).change(function() {
+            if($(this).val() == 'borrow') {
+              $('#lend_fields').hide();
+              $('#borrow_fields').show();
+            } else {
+              $('#borrow_fields').hide();
+              $('#lend_fields').show();
+            }
+        });
+        });
+    function updatesum() {
+      var sum;
+document.new_listing.sum.value = ((document.new_listing.listing_price.value -0) + (document.listing_price.value -0) * (document.listing_interest.value -0)/100) / (document.listing_term.value -0);
+}
+</script>

@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150822125618) do
+ActiveRecord::Schema.define(version: 20150828105850) do
+
+  create_table "leads", force: :cascade do |t|
+    t.string "email"
+  end
 
   create_table "listings", force: :cascade do |t|
     t.string   "name"
@@ -24,6 +28,9 @@ ActiveRecord::Schema.define(version: 20150822125618) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.integer  "user_id"
+    t.string   "note_type"
+    t.decimal  "interest"
+    t.decimal  "term"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -51,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150822125618) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "name"
+    t.string   "recipient"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

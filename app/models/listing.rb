@@ -6,15 +6,13 @@ class Listing < ActiveRecord::Base
     :styles => { :thumbnail => "100x100>" },
     :storage => :s3,
     :s3_credentials => "#{Rails.root}/config/aws.yml",
-    :bucket => "etsy-demo99";
-           
+    :bucket => "etsy-demo99";         
   end
 
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
-  validates :name, :description, :price, presence: true
+  validates :name, :price, presence: true
   validates :price, numericality: { greater_than: 0 }
-  validates_attachment_presence :image
 
   belongs_to :user
   has_many :orders

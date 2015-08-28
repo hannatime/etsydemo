@@ -1,27 +1,43 @@
 <div class="jumbotron">
 <div class="container">
-  <h1>THE SOCIAL WAY TO INVEST OR BORROW.</h1>
+  <h1>THE SOCIAL WAY TO <br>LEND & BORROW.</h1>
   <% if user_signed_in? %>
-  <%= link_to 'Lend Now', new_listing_path, class: "btn btn-warning", :style=>'color:#FFFFFF;' %>
-<% end %>
-<% if user_signed_in? %>
-  <%= link_to 'Borrow Now', new_listing_path, class: "btn btn-success", :style=>'color:#FFFFFF;' %>
+  <%= link_to 'Create a new listing', new_listing_path({:id => current_user.name}), class: "btn btn-lg btn-warning", :style=>'color:#FFFFFF;' %>
+  <% else %>
+  <form action="users/sign_up" method="get" class="form-inline">
+  <input type="email" name="email" class="form-control" class="form-group" style="min-width:20em" placeholder="Email Address">
+  <input type="submit" value="Join Now" class= "btn btn-warning hidden-md hidden-lg " style='color:#FFFFFF; width:100%;margin-top:5px;' class="form-group" >
+  <input type="submit" value="Join Now" class= "btn btn-warning hidden-sm hidden-xs" style='width:10em;color:#FFFFFF;' class="form-group" >
+  </form>
 <% end %>
 </div>
 </div>
 <div class="center">
   <div class="row">
     <% @listings.each do |listing| %>
+      
       <div class="col-md-3">
-        <div class="thumbnail">
-          <%= link_to image_tag(listing.image.url), listing %>
+        <div class="index_thumbnail thumbnail">
+          <div class = "note_index_value">
+          <h2><%= number_to_currency(listing.price) %></h2>
+          </div>
           <div class="caption">
             <h3><%= listing.name %></h3>
-            <p><%= number_to_currency(listing.price) %></p>
-            <p><%= "Sold by #{listing.user.name}" %></p>
+            <% if listing.note_type == "Lend"%>
+            <p>Loan Available</p>
+            <% elsif listing.note_type == "Borrow"%>
+             <p>Investment Available</p>
+             <% else %>
+             <p>No Note Type</p>
+             <% end %>          
+            <p><%= "Offered by #{listing.user.name}" %></p>
             <% if (user_signed_in?) && (current_user == listing.user) %>
-              <%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-link" %>
-              <%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-link" %>
+              <%= link_to 'Withdraw', listing, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger", :style=>'color:#FFFFFF;width:30%;' %>
+              <%= link_to 'Edit', edit_listing_path(listing), class: "btn btn-sm btn-primary", :style=>'color:#FFFFFF;width:30%;' %>              
+              <%= link_to 'View', listing, class: "btn btn-sm btn-success", :style=>'color:#FFFFFF;width:30%;' %>
+            <% end %>
+            <% if (user_signed_in?) && (current_user != listing.user) %>
+              <%= link_to 'View', listing, class: "btn btn-sm btn-success", :style=>'color:#FFFFFF;width:45%;' %>
             <% end %>
           </div>
         </div>
@@ -29,3 +45,5 @@
     <% end %>
   </div>
 </div>    
+
+
